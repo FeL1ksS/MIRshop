@@ -1,0 +1,73 @@
+<div id="cart" class="container-header-button__container-cart-button btn-group">
+	<button type="button" data-toggle="dropdown" data-loading-text="{{ text_loading }}" class="container-cart-button__button-cart dropdown-toggle">
+		<span id="cart-total">{{ text_items }}</span>
+		<i class="fa fa-shopping-cart"></i>
+	</button>
+	<ul class="cart-dropdown dropdown-menu pull-right">
+		<li>
+			<div class="cart-dropdown__container-cart-title container-cart-title">
+				<p class="container-cart-title__title">Корзина</p>
+			</div>
+		</li>
+		{% if products or vouchers %}
+		<li>
+			<div class="cart-dropdown__cart-container-product cart-container-product">
+				{% for product in products %}
+				<div class="cart-container-product-cart-product-item cart-product-item">
+					{% if product.thumb %}
+					<a href="{{ product.href }}" class="cart-product-item__product-image product-image">
+						<img class="product-image__image" src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}">
+					</a>
+					{% endif %}
+					<div class="cart-product-item__product-name-container">
+						<a class="cart-product-item__product-name product-name" href="{{ product.href }}">{{ product.name }}</a>
+						{% if product.option %}
+						{% for option in product.option %}
+						<span class="cart-product-item__product-option">{{ option.name }} {{ option.value }}</span>
+						{% endfor %}
+						{% endif %}
+						{% if product.recurring %}
+						<span class="cart-product-item__product-recurring">{{ text_recurring }} {{ product.recurring }}</span>
+						{% endif %}
+					</div>
+					<span class="cart-product-item__product-quantity">{{ product.quantity }}</span>
+					<span class="cart-product-item__product-total">{{ product.total }}</span>
+					<div class="cart-product-item__button-product-remove-container button-product-remove-container">
+						<button class="button-product-remove-container__button-product-remove button-product-remove" type="button" onclick="cart.remove('{{ product.cart_id }}');" title="{{ button_remove }}">
+							<i class="button-product-remove__icon fa fa-times"></i>
+						</button>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</li>
+		<li>
+			<div class="cart-container-total">
+				{% for total in totals %}
+				<div class="cart-container-total__cart-total-item cart-total-item">
+					<span class="cart-total-item__title">{{ total.title }}:</span>
+					<span class="cart-total-item__text">{{ total.text }}</span>
+				</div>
+				{% endfor %}
+			</div>
+		</li>
+		<li>
+			<div class="cart-container-link">
+				<a href="{{ cart }}" class="cart-container-link__cart-link-item cart-link-item">
+					<i class="cart-link-item__icon fa fa-shopping-cart"></i>
+					<span class="cart-link-item__text">{{ text_cart }}</span>
+				</a>
+				<a href="{{ checkout }}" class="cart-container-link__cart-link-item cart-link-item">
+					<i class="cart-link-item__icon fa fa-share"></i>
+					<span class="cart-link-item__text">{{ text_checkout }}</span>
+				</a>
+			</div>
+		</li>
+		{% else %}
+		<li>
+			<p class="text-none-product">{{ text_empty }}</p>
+		</li>
+		{% endif %}
+	</ul>
+</div>
+  

@@ -1,0 +1,80 @@
+<h3 class="title-home">{{ heading_title }}</h3>
+<div class="swiper-viewport swiper-viewport--product">
+	<div id="slideshowBestseller" class="swiper-container">
+		<div class="swiper-wrapper"> 
+			{% for product in products %}
+			<div class="swiper-slide swiper-slide--product">
+				<div class="product-item">
+					<div class="product-item__product-container-image product-container-image">
+						<a href="{{ product.href }}" class="product-container-image__product-link-image product-link-image">
+							<img class="product-link-image__image" src="{{ product.thumb }}" alt="{{ product.name }}">
+						</a> 
+					</div>
+					<div class="product-item__product-container-text product-container-text">
+						<h4 class="product-container-text__product-title product-title">
+							<a class="product-title__link" href="{{ product.href }}">{{ product.name }}</a>
+						</h4>
+						<p class="product-container-text__product-price-container product-price-container">
+							{% if not product.special %}
+							<span class="product-price-container__price">{{ product.price }}</span>
+							{% else %}
+							<span class="product-price-container__price-new">{{ product.special }}</span>
+							<span class="product-price-container__price-old">{{ product.price }}</span>
+							{% endif %}
+						</p>
+					</div>
+					<div class="product-item__product-container-button product-container-button">
+						<button type="button" data-toggle="tooltip" title="{{ button_cart }}" onclick="cart.add('{{ product.product_id }}');" class="product-container-button__product-cart-button product-cart-button">
+							<i class="product-cart-button__icon fa fa-shopping-cart"></i>
+							<span class="product-cart-button__text">{{ button_cart }}</span>
+						</button>
+						<button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');" class="product-container-button__product-wishlist-button product-wishlist-button">
+							<i class="fa fa-heart"></i>
+						</button>
+						<button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');" class="product-container-button__product-compare-button">
+							<i class="fa fa-exchange"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="swiper-pagination slideshowBestseller"></div>
+	<div class="swiper-pager">
+		<div class="swiper-button-next swiper-bestseller-button-next"></div>
+		<div class="swiper-button-prev swiper-bestseller-button-prev"></div>
+	</div>
+</div>
+
+<script type="text/javascript"><!--
+	$('#slideshowBestseller').swiper({
+		slidesPerView: 5,
+		spaceBetween: 5,
+		// init: false,
+		pagination: {
+		  el: '.swiper-pagination',
+		  clickable: true,
+		},
+		breakpoints: {
+		  1024: {
+			slidesPerView: 4,
+			spaceBetween: 40,
+		  },
+		  992: {
+			slidesPerView: 3,
+			spaceBetween: 30,
+		  },
+		  660: {
+			slidesPerView: 2,
+			spaceBetween: 20,
+		  },
+		  415: {
+			slidesPerView: 1,
+			spaceBetween: 10,
+		  }
+		},
+		nextButton: '.swiper-bestseller-button-next',
+		prevButton: '.swiper-bestseller-button-prev',
+	});
+--></script>

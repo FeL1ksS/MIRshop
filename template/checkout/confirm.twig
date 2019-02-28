@@ -1,0 +1,113 @@
+{% if not redirect %}
+<div class="shopping">
+    <div class="shopping-content">
+      <div class="shopping-list">
+        <div class="shopping-list-row shopping-list-row-header">
+          <div class="shopping-list-column">
+            <div class="shopping-list__item shopping-list-column-img">
+              {# {{ column_image }} #}
+            </div>
+          </div>
+          <div class="shopping-list-column shopping-list-column-product">
+            <div class="shopping-list__item">
+              {{ column_name }}
+            </div>
+          </div>
+          {# <div class="shopping-list-column">
+            <div class="shopping-list__item">
+              {{ column_model }}
+            </div>
+          </div> #}
+          <div class="shopping-list-column shopping-list-column-count">
+            <div class="shopping-list__item">
+              {{ column_quantity }}
+            </div>
+          </div>
+          <div class="shopping-list-column shopping-list-column-price">
+            <div class="shopping-list__item">
+              {{ column_price }}
+            </div>
+          </div>
+          <div class="shopping-list-column shopping-list-column-price-total">
+            <div class="shopping-list__item">
+              {{ column_total }}
+            </div>
+          </div>
+        </div>
+        {% for product in products %}
+          <!-- Если товар есть на складе -->
+          <div class="shopping-list-row ">
+          <div class="shopping-list-column shopping-list-column-img">
+            <div class="shopping-list__item shopping-list__item-img">
+              {% if product.thumb %}
+              <a href="{{ product.href }}">
+                <img src="{{ product.thumb }}" alt="{{ product.name }}"
+                  title="{{ product.name }}" class="img-thumbnail" />
+              </a>
+              {% endif %}
+            </div>
+          </div>
+          <div class="shopping-list-column shopping-list-column-product">
+            <div class="shopping-list__item">
+              <a href="{{ product.href }}">{{ product.name }}</a> {{ product.model }}
+              {% if product.option %}
+                {% for option in product.option %} 
+                <br />
+                <small>{{ option.name }}: {{ option.value }}</small> {% endfor %}
+              {% endif %}
+              {% if product.reward %} 
+                <br />
+                <small>{{ product.reward }}</small> {% endif %}
+              {% if product.recurring %} 
+                <br />
+                <span class="label label-info">{{ text_recurring_item }}</span>
+                <small>{{ product.recurring }}</small> 
+              {% endif %}
+            </div>
+          </div>
+          <div class="shopping-list-column shopping-list-column-count">
+            <div class="shopping-list__item">
+              <div class="shopping-list__item-input">
+                <input type="text" name="quantity[{{ product.cart_id }}]"
+                value="{{ product.quantity }}" size="1" class="form-control" readonly/>
+              </div>
+
+            </div>
+          </div>
+          <div class="shopping-list-column shopping-list-column-price">
+            <div class="shopping-list__item">
+              {{ product.price }}
+            </div>
+          </div>
+          <div class="shopping-list-column shopping-list-column-price-total">
+            <div class="shopping-list__item">
+              {{ product.total }}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+      <table class="table table-bordered table-hover">        
+        <tfoot>
+          {% for total in totals %}
+          <tr>
+            <td colspan="4" class="text-right"><strong>{{ total.title }}:</strong></td>
+            <td class="text-right">{{ total.text }}</td>
+          </tr>
+          {% endfor %}
+        </tfoot>
+      </table>
+    </div>
+</div>
+
+{{ payment }}
+
+{% else %} 
+<script type="text/javascript"><!--
+location = '{{ redirect }}';
+//--></script> 
+{% endif %} 

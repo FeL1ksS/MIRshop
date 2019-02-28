@@ -1,0 +1,21 @@
+		<footer class="footer">
+			<div class="footer-wrapper">
+				{% if informations %}
+				<ul class="footer-wrapper__container-footer-navigation container-footer-navigation">
+					{% for information in informations %}
+					<li class="container-footer-navigation__item-footer-navigation item-footer-navigation">
+						<a class="item-footer-navigation__link" href="{{ information.href }}">{{ information.title }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+				<a href="" class="footer-wrapper__container-dev-link">
+					<img src="/catalog/view/theme/tvoimir/image/dev_mini.svg">
+				</a>
+				{% endif %}
+			</div>
+		</footer>
+		{% for script in scripts %}
+		<script src="{{ script }}" type="text/javascript"></script>
+		{% endfor %}
+	</body>
+</html>

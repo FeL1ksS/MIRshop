@@ -1,0 +1,27 @@
+{% if categories %}
+<ul class="header-wrapper__container-header-category container-header-category">
+	{% for category in categories %}
+	{% if category.children %}
+	<li class="container-header-category__item-header-category item-header-category dropdown">
+		<a href="{{ category.href }}" class="item-header-category__link dropdown-toggle" data-toggle="dropdown">{{ category.name }}</a>
+		<div class="container-header-category__header-dropdown-menu header-dropdown-menu dropdown-menu">
+			{% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+			<ul class="header-dropdown-menu__header-container-dropdown-category header-container-dropdown-category">
+				{% for child in children %}
+				<li class="header-container-dropdown-category__header-dropdown-category-item header-dropdown-category-item">
+					<a class="header-dropdown-category-item__link" href="{{ child.href }}">{{ child.name }}</a>
+				</li>
+				{% endfor %}
+			</ul>
+			{% endfor %}
+			<a href="{{ category.href }}" class="header-dropdown-menu__link-see-all">{{ text_all }}</a> 
+		</div>
+	</li>
+	{% else %}
+	<li class="container-header-category__item-header-category">
+		<a href="{{ category.href }}" class="item-header-category__link">{{ category.name }}</a>
+	</li>
+	{% endif %}
+	{% endfor %}
+</ul>
+{% endif %} 

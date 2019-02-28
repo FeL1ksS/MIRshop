@@ -1,0 +1,48 @@
+<h3 class="title-home">Наши друзья</h3>
+<div class="swiper-viewport swiper-viewport--friend">
+	<div id="carousel{{ module }}" class="swiper-container">
+		<div class="swiper-wrapper swiper-wrapper--friend">
+			{% for banner in banners %}
+			<div class="swiper-slide swiper-slide-friend">
+				{% if banner.link %}
+				<a class="swiper-slide-friend__link" href="{{ banner.link }}">
+					<img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-responsive" />
+				</a>
+				{% else %}
+				<img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-responsive" />
+				{% endif %}
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+		<div class="swiper-pagination carousel{{ module }}"></div>
+		<div class="swiper-pager">
+</div>
+</div>
+<script type="text/javascript"><!--
+	$('#carousel{{ module }}').swiper({
+		mode: 'horizontal',
+		slidesPerView: 3,
+		spaceBetween: 30,
+		breakpoints: {
+			1024: {
+				slidesPerView: 4,
+				spaceBetween: 40,
+			},
+			992: {
+				slidesPerView: 3,
+				spaceBetween: 30,
+			},
+			660: {
+				slidesPerView: 2,
+				spaceBetween: 20,
+			},
+			415: {
+				slidesPerView: 1,
+				spaceBetween: 10,
+			}
+		},
+		autoplay: 2500,
+		loop: true
+	});
+--></script>

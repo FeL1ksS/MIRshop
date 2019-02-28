@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="{{ direction }}" lang="{{ lang }}">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>{{ title }}</title>
+<base href="{{ base }}" />
+{% if description %}
+<meta name="description" content="{{ description }}" />
+{% endif %}
+{% if keywords %}
+<meta name="keywords" content="{{ keywords }}" />
+{% endif %}
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+<link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+<script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+{# <link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css" /> #}
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+{% for style in styles %}
+<link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
+{% endfor %}
+<link href="catalog/view/theme/tvoimir/stylesheet/stylesheet.css" rel="stylesheet">
+{% for script in scripts %}
+<script src="{{ script }}" type="text/javascript"></script>
+{% endfor %}
+<script src="catalog/view/javascript/common.js" type="text/javascript"></script>
+{% for link in links %}
+<link href="{{ link.href }}" rel="{{ link.rel }}" />
+{% endfor %}
+{% for analytic in analytics %}
+{{ analytic }}
+{% endfor %}
+</head>
+<body>
+	<header class="header">
+		<div class="header__top-header">
+			<div class="header-wrapper">
+				<div class="header-wrapper_container-navigation container-navigation">
+					{% if informations %}
+					<ul class="container-navigation__navigation navigation">
+						{% for information in informations %}
+						<li class="navigation__item-navigation item-navigation">
+							<a class="item-navigation__link" href="{{ information.href }}">{{ information.title }}</a>
+						</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</div>
+				<div class="header-wrapper__container-account container-account">
+					<a href="{{ wishlist }}" class="container-account__link-wishlist-and-compare link-wishlist-and-compare">
+						<i class="fa fa-heart"></i>
+						<span class="link-wishlist-and-compare__text">{{ text_wishlist }}</span>
+					</a>
+					<a href="{{ compare }}" class="container-account__link-wishlist-and-compare link-wishlist-and-compare">
+						<i class="fa fa-balance-scale"></i>
+						<span class="link-wishlist-and-compare__text">Сравнение</span>
+					</a>
+					<div class="container-account__container-dropdown container-dropdown dropdown">
+						<a href="{{ account }}" title="{{ text_account }}" class="title-dropdown__title-dropdown title-dropdown dropdown-toggle" data-toggle="dropdown">
+							<i class="fa fa-user"></i>
+							<span class="title-dropdown__text">{{ text_account }}</span>
+							<span class="caret"></span>
+						</a>
+						<ul class="container-dropdown__dropdown-menu dropdown-menu dropdown-menu-right">
+							{% if logged %}
+							<li class="dropdown-menu__item-dropdow-menu item-dropdow-menu">
+								<a class="item-dropdow-menu__link" href="{{ account }}">{{ text_account }}</a>
+							</li>
+							<li class="dropdown-menu__item-dropdow-menu item-dropdow-menu">
+								<a class="item-dropdow-menu__link" href="{{ order }}">{{ text_order }}</a>
+							</li>
+							<li class="dropdown-menu__item-dropdow-menu item-dropdow-menu">
+								<a class="item-dropdow-menu__link" href="{{ transaction }}">{{ text_transaction }}</a>
+							</li>
+							<li class="dropdown-menu__item-dropdow-menu item-dropdow-menu">
+								<a class="item-dropdow-menu__link" href="{{ download }}">{{ text_download }}</a>
+							</li>
+							<li class="dropdown-menu__item-dropdow-menu item-dropdow-menu">
+								<a class="item-dropdow-menu__link" href="{{ logout }}">{{ text_logout }}</a>
+							</li>
+							{% else %}
+							<li class="dropdown-menu__item-dropdow-menu item-dropdow-menu">
+								<a class="item-dropdow-menu__link" href="{{ register }}">{{ text_register }}</a>
+							</li>
+							<li class="dropdown-menu__item-dropdow-menu item-dropdow-menu">
+								<a class="item-dropdow-menu__link" href="{{ login }}">{{ text_login }}</a>
+							</li>
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="header__center-header">
+			<div class="header-wrapper header-wrapper--center">
+				<div class="container-logo-search-phone">
+					<div class="header-wrapper__container-logo" id="logo">
+						{% if logo %}
+						<a href="{{ home }}">
+							<img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" />
+						</a>
+						{% else %}
+						<a class="container-logo__text-logo" href="{{ home }}">{{ name }}</a>
+						{% endif %}
+					</div>
+					<div class="header-wrapper__container-header-search container-header-search">
+						{{ search }}
+					</div>
+					<div class="header-wrapper__container-header-phone container-header-phone">
+						<div class="container-header-phone__phone-container-item">
+							<img class="container-header-phone__icon" src="/catalog/view/theme/tvoimir/image/velcom.png" alt="velcom">
+							<p class="container-header-phone__item-phone">{{ telephone }}</p>
+						</div>
+					</div>
+				</div>
+				<div class="header-wrapper__container-header-button container-header-button">
+					<a class="container-header-button__header-button-item header-button-item" href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}">
+						<i class="fa fa-heart"></i>
+						<span class="header-button-item__text">{{ text_wishlist }}</span>
+					</a>
+					<a class="container-header-button__header-button-item" href="{{ compare }}">
+						<i class="fa fa-balance-scale"></i>
+						<span class="header-button-item__text">Сравнение</span>
+					</a>
+					{{ cart }}
+				</div>
+			</div>
+		</div>
+		
+		{% if title == 'Your Store' %}
+		<div class="header__bottom-header">
+			<div class="header-wrapper">
+				{{ menu }}
+			</div>
+		</div>
+		{% endif %}
+	</header>

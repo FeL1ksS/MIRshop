@@ -1,0 +1,47 @@
+{{ header }}
+<div class="container-content-page-login">
+	<div id="account-login" class="container-content-page-login__wrapper">
+		<ul class="breadcrumb">
+			{% for breadcrumb in breadcrumbs %}
+			<li>
+				<a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+			</li>
+			{% endfor %}
+		</ul>
+		{% if success %}
+		<div class="alert alert-success alert-dismissible">
+			<i class="fa fa-check-circle"></i>
+			{{ success }}
+		</div>
+		{% endif %}
+		{% if error_warning %}
+		<div class="alert alert-danger alert-dismissible">
+			<i class="fa fa-exclamation-circle"></i>
+			{{ error_warning }}
+		</div>
+		{% endif %}
+		<div id="content" class="content-login">
+			<div class="content-login__window-login window-login">
+				<h2 class="window-login__title">Войти в личный кабинет</h2>
+				<form action="{{ action }}" method="post" enctype="multipart/form-data">
+					<div class="form-group window-login__form-login form-login">
+						<label class="control-label label-input-account" for="input-email">{{ entry_email }}</label>
+						<input type="text" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-email" class="form-control input-account" />
+					</div>
+					<div class="form-group window-login__form-login form-login">
+						<label class="control-label label-input-account" for="input-password">{{ entry_password }}</label>
+						<input type="password" name="password" value="{{ password }}" placeholder="{{ entry_password }}" id="input-password" class="form-control input-account" />
+						<a class="form-login__forgotten-password" href="{{ forgotten }}">{{ text_forgotten }}</a>
+					</div>
+					<div class="window-login__button-login-container">
+						<input type="submit" value="{{ button_login }}" class="button-registration-continue" />
+						{% if redirect %}
+						<input type="hidden" name="redirect" value="{{ redirect }}" />
+						{% endif %}
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{{ footer }}
